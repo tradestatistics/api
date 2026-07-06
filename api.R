@@ -6,11 +6,11 @@ library(pool)
 library(openapi)
 
 # Read credentials from file excluded in .gitignore
-readRenviron("/tradestatistics/plumber-api")
+readRenviron("/tradestatistics/credentials.txt")
 
 con <- dbPool(
   drv = RPostgres::Postgres(),
-  dbname = "tradestatistics",
+  dbname = Sys.getenv("TRADESTATISTICS_SQL_NAME"),
   host = "localhost",
   user = Sys.getenv("TRADESTATISTICS_SQL_USR"),
   password = Sys.getenv("TRADESTATISTICS_SQL_PWD")
