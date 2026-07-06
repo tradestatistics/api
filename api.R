@@ -6,7 +6,7 @@ library(pool)
 library(openapi)
 
 # Read credentials from file excluded in .gitignore
-# readRenviron("/tradestatistics/plumber-api")
+readRenviron("/tradestatistics/plumber-api")
 
 con <- dbPool(
   drv = RPostgres::Postgres(),
@@ -396,7 +396,7 @@ itpd_imp_exp_sec <- function(year, importer, exporter, sector, table) {
   }
 
   conditions <- sprintf("year = %s", year)
-  
+
   if (importer != "all") conditions <- c(conditions, sprintf("importer_iso3_dynamic in (%s)", importer))
   if (exporter != "all") conditions <- c(conditions, sprintf("exporter_iso3_dynamic in (%s)", exporter))
   if (sector != "all") conditions <- c(conditions, sprintf("broad_sector_id = %s", sector))
