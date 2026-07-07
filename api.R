@@ -11,9 +11,9 @@ readRenviron("/tradestatistics/credentials.txt")
 con <- dbPool(
   drv = RPostgres::Postgres(),
   dbname = Sys.getenv("TRADESTATISTICS_SQL_NAME"),
-  host = "localhost",
-  user = Sys.getenv("TRADESTATISTICS_SQL_USR"),
-  password = Sys.getenv("TRADESTATISTICS_SQL_PWD")
+  host = Sys.getenv("TRADESTATISTICS_SQL_HOST"),
+  user = Sys.getenv("TRADESTATISTICS_SQL_USER"),
+  password = Sys.getenv("TRADESTATISTICS_SQL_PASSWORD")
 )
 
 on.exit(poolClose(con))
