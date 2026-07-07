@@ -728,4 +728,4 @@ api <- api_get(api, "/tables", function() {
 
 # RUN API ----
 
-api_run(api, host = "127.0.0.1", port = 5000, debug = TRUE)
+api_run(api, host = "127.0.0.1", port = 5000, debug = FALSE)
