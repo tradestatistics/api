@@ -5,7 +5,7 @@ After=postgresql
 [Service]
 Type=simple
 User=www-data
-WorkingDirectory=/tradestatistics/plumber-api
+WorkingDirectory=/tradestatistics/api
 ExecStart=/usr/bin/Rscript api.R
 Restart=on-abnormal
 StandardError=file:/tradestatistics/log/api-error.log
