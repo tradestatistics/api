@@ -2,13 +2,13 @@
 # fix string = "all"
 
 library(RPostgres)
-library(pool)
+library(DBI)
 library(openapi)
 
 # Read credentials from file excluded in .gitignore
 readRenviron("/tradestatistics/credentials.txt")
 
-con <- dbPool(
+con <- dbConnect(
   drv = RPostgres::Postgres(),
   dbname = Sys.getenv("TRADESTATISTICS_SQL_NAME"),
   host = Sys.getenv("TRADESTATISTICS_SQL_HOST"),
@@ -16,7 +16,7 @@ con <- dbPool(
   password = Sys.getenv("TRADESTATISTICS_SQL_PASSWORD")
 )
 
-on.exit(poolClose(con))
+on.exit(dbDisconnect(con))
 
 # Static data -------------------------------------------------------------
 
