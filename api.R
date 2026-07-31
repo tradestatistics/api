@@ -489,165 +489,165 @@ api <- api_init(
   description = "International trade data available with different levels of aggregation"
 )
 
-api <- api_get(api, "/", function() {
+api_get(api, "/", function() {
   paste("Hello World! Welcome to Open Trade Statistics API. Go to https://api.tradestatistics.io/__docs__/ or use the R client!")
 })
 
 ## countries ----
 
-api <- api_get(api, "/countries", function() {
+api_get(api, "/countries", function() {
   countries()
 })
 
-api <- api_get(api, "/countries_colours", function() {
+api_get(api, "/countries_colours", function() {
   countries_colours()
 })
 
 # importers-exporters ----
 
-api <- api_get(api, "/importers", function(year = NA) {
+api_get(api, "/importers", function(year = NA) {
   dbGetQuery(con, sprintf("select importer_iso3_dynamic from itpds_imp where year = %s", check_year(as.integer(year))))
 })
 
-api <- api_get(api, "/exporters", function(year = NA) {
+api_get(api, "/exporters", function(year = NA) {
   dbGetQuery(con, sprintf("select exporter_iso3_dynamic from itpds_exp where year = %s", check_year(as.integer(year))))
 })
 
 ## years ----
 
-api <- api_get(api, "/years", function() {
+api_get(api, "/years", function() {
   data.frame(year = c(min_year(), max_year()))
 })
 
 ## sectors ----
 
-api <- api_get(api, "/sectors", function() {
+api_get(api, "/sectors", function() {
   sectors()
 })
 
-api <- api_get(api, "/sectors_colours", function() {
+api_get(api, "/sectors_colours", function() {
   sectors_colours()
 })
 
 ## industries ----
 
-api <- api_get(api, "/industries", function() {
+api_get(api, "/industries", function() {
   industries()
 })
 
 ## SEC ----
 
-api <- api_get(api, "/itpde_sec", function(year, sector) {
-  itpde_ind(year, sector, table = "itpde_sec")
+api_get(api, "/itpde_sec", function(year, sector) {
+  itpde_sec(year, sector, table = "itpde_sec")
 })
 
-api <- api_get(api, "/itpds_sec", function(year, sector) {
-  itpde_ind(year, sector, table = "itpds_sec")
+api_get(api, "/itpds_sec", function(year, sector) {
+  itpde_sec(year, sector, table = "itpds_sec")
 })
 
 ## IND ----
 
-api <- api_get(api, "/itpde_ind", function(year, industry) {
+api_get(api, "/itpde_ind", function(year, industry) {
   itpde_ind(year, industry, table = "itpde_ind")
 })
 
-api <- api_get(api, "/itpds_ind", function(year, industry) {
+api_get(api, "/itpds_ind", function(year, industry) {
   itpde_ind(year, industry, table = "itpds_ind")
 })
 
 ## IMP ----
 
-api <- api_get(api, "/itpde_imp", function(year, importer) {
+api_get(api, "/itpde_imp", function(year, importer) {
   itpde_imp(year, importer, table = "itpde_imp")
 })
 
-api <- api_get(api, "/itpds_imp", function(year, importer) {
+api_get(api, "/itpds_imp", function(year, importer) {
   itpds_imp(year, importer, table = "itpds_imp")
 })
 
 ## EXP ----
 
-api <- api_get(api, "/itpde_exp", function(year, exporter) {
+api_get(api, "/itpde_exp", function(year, exporter) {
   itpde_exp(year, exporter, table = "itpde_exp")
 })
 
-api <- api_get(api, "/itpds_exp", function(year, exporter) {
+api_get(api, "/itpds_exp", function(year, exporter) {
   itpds_exp(year, exporter, table = "itpds_exp")
 })
 
 ## IMP-SEC ----
 
-api <- api_get(api, "/itpde_imp_sec", function(year, importer, sector) {
+api_get(api, "/itpde_imp_sec", function(year, importer, sector) {
   itpde_imp_sec(year, importer, sector, table = "itpde_imp_sec")
 })
 
-api <- api_get(api, "/itpds_imp_sec", function(year, importer, sector) {
+api_get(api, "/itpds_imp_sec", function(year, importer, sector) {
   itpde_imp_sec(year, importer, sector, table = "itpds_imp_sec")
 })
 
 ## EXP-SEC ----
 
-api <- api_get(api, "/itpde_exp_sec", function(year, exporter, sector) {
+api_get(api, "/itpde_exp_sec", function(year, exporter, sector) {
   itpde_exp_sec(year, exporter, sector, table = "itpde_exp_sec")
 })
 
-api <- api_get(api, "/itpds_exp_sec", function(year, exporter, sector) {
+api_get(api, "/itpds_exp_sec", function(year, exporter, sector) {
   itpde_exp_sec(year, exporter, sector, table = "itpds_exp_sec")
 })
 
 ## IMP-IND ----
 
-api <- api_get(api, "/itpde_imp_ind", function(year, importer, industry) {
+api_get(api, "/itpde_imp_ind", function(year, importer, industry) {
   itpde_imp_ind(year, importer, industry, table = "itpde_imp_ind")
 })
 
-api <- api_get(api, "/itpds_imp_ind", function(year, importer, industry) {
+api_get(api, "/itpds_imp_ind", function(year, importer, industry) {
   itpde_imp_ind(year, importer, industry, table = "itpds_imp_ind")
 })
 
 ## EXP-IND ----
 
-api <- api_get(api, "/itpde_exp_ind", function(year, exporter, industry) {
+api_get(api, "/itpde_exp_ind", function(year, exporter, industry) {
   itpde_imp_ind(year, exporter, industry, table = "itpde_exp_ind")
 })
 
-api <- api_get(api, "/itpds_exp_ind", function(year, exporter, industry) {
+api_get(api, "/itpds_exp_ind", function(year, exporter, industry) {
   itpds_exp_ind(year, exporter, industry, table = "itpds_exp_ind")
 })
 
 ## IMP-EXP ----
 
-api <- api_get(api, "/itpde_imp_exp", function(year, importer, exporter) {
+api_get(api, "/itpde_imp_exp", function(year, importer, exporter) {
   itpde_imp_exp(year, importer, exporter, table = "itpde_imp_exp")
 })
 
-api <- api_get(api, "/itpds_imp_exp", function(year, importer, exporter) {
+api_get(api, "/itpds_imp_exp", function(year, importer, exporter) {
   itpds_imp_exp(year, importer, exporter, table = "itpds_imp_exp")
 })
 
 ## IMP-EXP-SEC ----
 
-api <- api_get(api, "/itpde_imp_exp_sec", function(year, importer, exporter, sector) {
+api_get(api, "/itpde_imp_exp_sec", function(year, importer, exporter, sector) {
   itpde_imp_exp_sec(year, importer, exporter, sector, table = "itpde_imp_exp_sec")
 })
 
-api <- api_get(api, "/itpds_imp_exp_sec", function(year, importer, exporter, sector) {
+api_get(api, "/itpds_imp_exp_sec", function(year, importer, exporter, sector) {
   itpds_imp_exp_sec(year, importer, exporter, sector, table = "itpds_imp_exp_sec")
 })
 
 ## FULL TABLES ----
 
-api <- api_get(api, "/itpde", function(year, importer, exporter, sector, industry) {
+api_get(api, "/itpde", function(year, importer, exporter, sector, industry) {
   itpde(year, importer, exporter, sector, industry, table = "itpde")
 })
 
-api <- api_get(api, "/itpds", function(year, importer, exporter, sector, industry) {
+api_get(api, "/itpds", function(year, importer, exporter, sector, industry) {
   itpds(year, importer, exporter, sector, industry, table = "itpds")
 })
 
 # Available tables ----
 
-api <- api_get(api, "/tables", function() {
+api_get(api, "/tables", function() {
   data.frame(
     table = c(
       "countries",
